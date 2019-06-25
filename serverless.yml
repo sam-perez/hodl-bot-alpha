@@ -24,7 +24,7 @@ provider:
     iamRoleStatements:
     environment:
         MY_STAGE: ${self:custom.myStage}
-        # LL_API_KEY: ${s3:ll-config/lambda-functions/${self:custom.myStage}/LL_API_KEY}
+        SLACK_POST_URL: ${s3:hodl-bot-config/lambda-functions/${self:custom.myStage}/SLACK_POST_URL}
         DEPLOYMENT_ENV: ${self:custom.deployment_environment.${self:custom.myStage}}
 
 functions:
@@ -32,5 +32,5 @@ functions:
         handler: index.main
         events:
             - schedule:
-                  rate: rate(1 minute)
+                  rate: rate(15 minutes)
                   enabled: true
