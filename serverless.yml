@@ -1,0 +1,36 @@
+service: hodl-bot
+
+# custom variables that hold the stage we are in plus enable/disable data
+# used when scheduling the functions
+custom:
+    myStage: ${opt:stage, self:provider.stage}
+    deployment_environment:
+        local: local
+        prod: production
+        staging: staging
+        dev: development
+
+package:
+    exclude:
+        - test/**
+
+provider:
+    name: aws
+    runtime: nodejs8.10
+    stage: prod
+    region: us-east-1
+    profile: hodl
+    timeout: 300 # set default timeout for each fn to 5 mins
+    iamRoleStatements:
+    environment:
+        MY_STAGE: ${self:custom.myStage}
+        # LL_API_KEY: ${s3:ll-config/lambda-functions/${self:custom.myStage}/LL_API_KEY}
+        DEPLOYMENT_ENV: ${self:custom.deployment_environment.${self:custom.myStage}}
+
+functions:
+    execute_dca_strategy:
+        handler: index.main
+        events:
+            - schedule:
+                  rate: rate(1 minute)
+                  enabled: true
