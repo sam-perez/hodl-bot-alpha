@@ -37,3 +37,11 @@ functions:
             - schedule:
                   rate: rate(15 minutes)
                   enabled: true
+        vpc:
+            securityGroupIds:
+                - sg-051dfc739927d85ac
+            subnetIds:
+                - subnet-017717610b1712772
+                - subnet-021d5bb86407c3b7b
+                - subnet-069976d534e10821c
+                - subnet-08489c9d0d965422e
