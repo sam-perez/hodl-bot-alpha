@@ -1,6 +1,7 @@
 {
     "scripts": {
-        "migrate": "knex migrate:latest"
+        "migrate": "knex migrate:latest",
+        "invoke-local": "serverless invoke local --function execute_dca_strategy"
     },
     "dependencies": {
         "airtable": "^0.6.0",

@@ -29,6 +29,10 @@ provider:
         AIRTABLE_API_KEY: ${s3:hodl-bot-config/lambda-functions/${self:custom.myStage}/AIRTABLE_API_KEY}
         AIRTABLE_CONFIG_BASE_ID: ${s3:hodl-bot-config/lambda-functions/${self:custom.myStage}/AIRTABLE_CONFIG_BASE_ID}
         DEPLOYMENT_ENV: ${self:custom.deployment_environment.${self:custom.myStage}}
+        PSQL_DB_HOST: ${s3:hodl-bot-config/lambda-functions/${self:custom.myStage}/PSQL_DB_HOST}
+        PSQL_DB_DATABASE: ${s3:hodl-bot-config/lambda-functions/${self:custom.myStage}/PSQL_DB_DATABASE}
+        PSQL_DB_PASSWORD: ${s3:hodl-bot-config/lambda-functions/${self:custom.myStage}/PSQL_DB_PASSWORD}
+        PSQL_DB_USERNAME: ${s3:hodl-bot-config/lambda-functions/${self:custom.myStage}/PSQL_DB_USERNAME}
 
 functions:
     execute_dca_strategy:

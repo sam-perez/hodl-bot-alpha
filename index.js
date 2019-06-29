@@ -2,10 +2,18 @@
 const airtableLib = require('./lib/airtable');
 const strategyHelperLib = require('./lib/strategy_helper');
 const slackerLib = require('./lib/slacker');
+const dbLib = require('./lib/db');
+
 const R = require('ramda');
 
 module.exports.main = async (event, context, callback) => {
+  const dbManager = dbLib.getDBManager();
+
   try {
+    const { purchaseLedgerRows } = await dbManager.getAllPurchaseLedgerRows();
+
+    console.log({ purchaseLedgerRows });
+
     const { allBuyConfigs } = await airtableLib.getAllBuyConfigs();
 
     const activeConfigs = R.filter(
@@ -25,12 +33,15 @@ module.exports.main = async (event, context, callback) => {
       console.log({ amountToBuyInDollars });
 
       await slackerLib.reportPurchasesToSlack({
-        purchases: { activeConfigs, amountToBuyInDollars }
+        purchases: { activeConfigs, amountToBuyInDollars, purchaseLedgerRows }
       });
     }
   } catch (error) {
     console.log('Error during lambda execution', { error });
     await slackerLib.reportErrorToSlack({ error });
-    callback(error);
+  } finally {
+    await dbManager.closeAllConnections();
   }
+
+  callback();
 };

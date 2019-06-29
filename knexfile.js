@@ -5,10 +5,10 @@ dotenv.config();
 const defaultConfig = {
   client: 'pg',
   connection: {
-    host: process.env.PSQL_HOST,
-    user: process.env.PSQL_USER,
-    password: process.env.PSQL_PASSWORD,
-    database: process.env.PSQL_DATABASE,
+    host: process.env.PSQL_DB_HOST,
+    user: process.env.PSQL_DB_USERNAME,
+    password: process.env.PSQL_DB_PASSWORD,
+    database: process.env.PSQL_DB_DATABASE,
     charset: 'utf8'
   },
   pool: {
