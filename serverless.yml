@@ -24,7 +24,8 @@ provider:
     iamRoleStatements:
     environment:
         MY_STAGE: ${self:custom.myStage}
-        SLACK_POST_URL: ${s3:hodl-bot-config/lambda-functions/${self:custom.myStage}/SLACK_POST_URL}
+        SLACK_ERROR_REPORTING_URL: ${s3:hodl-bot-config/lambda-functions/${self:custom.myStage}/SLACK_ERROR_REPORTING_URL}
+        SLACK_PURCHASES_REPORTING_URL: ${s3:hodl-bot-config/lambda-functions/${self:custom.myStage}/SLACK_PURCHASES_REPORTING_URL}
         AIRTABLE_API_KEY: ${s3:hodl-bot-config/lambda-functions/${self:custom.myStage}/AIRTABLE_API_KEY}
         AIRTABLE_CONFIG_BASE_ID: ${s3:hodl-bot-config/lambda-functions/${self:custom.myStage}/AIRTABLE_CONFIG_BASE_ID}
         DEPLOYMENT_ENV: ${self:custom.deployment_environment.${self:custom.myStage}}

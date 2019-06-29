@@ -1,8 +1,7 @@
 'use strict';
-//const axios = require('axios');
-//await axios.post(process.env.SLACK_POST_URL, { text: `HODL BOT RUNNING @ ${currentTime}` });
 const airtableLib = require('./lib/airtable');
 const strategyHelperLib = require('./lib/strategy_helper');
+const slackerLib = require('./lib/slacker');
 const R = require('ramda');
 
 module.exports.main = async (event, context, callback) => {
@@ -24,9 +23,14 @@ module.exports.main = async (event, context, callback) => {
       });
 
       console.log({ amountToBuyInDollars });
+
+      await slackerLib.reportPurchasesToSlack({
+        purchases: { activeConfigs, amountToBuyInDollars }
+      });
     }
   } catch (error) {
     console.log('Error during lambda execution', { error });
+    await slackerLib.reportErrorToSlack({ error });
     callback(error);
   }
 };
