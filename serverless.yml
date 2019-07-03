@@ -40,7 +40,7 @@ functions:
         handler: index.main
         events:
             - schedule:
-                  rate: rate(15 minutes)
+                  rate: rate(1 minute)
                   enabled: true
         vpc:
             securityGroupIds:
