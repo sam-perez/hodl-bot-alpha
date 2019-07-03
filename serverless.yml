@@ -33,6 +33,7 @@ provider:
         PSQL_DB_DATABASE: ${s3:hodl-bot-config/lambda-functions/${self:custom.myStage}/PSQL_DB_DATABASE}
         PSQL_DB_PASSWORD: ${s3:hodl-bot-config/lambda-functions/${self:custom.myStage}/PSQL_DB_PASSWORD}
         PSQL_DB_USERNAME: ${s3:hodl-bot-config/lambda-functions/${self:custom.myStage}/PSQL_DB_USERNAME}
+        GDAX_API_URI: ${s3:hodl-bot-config/lambda-functions/${self:custom.myStage}/GDAX_API_URI}
 
 functions:
     execute_dca_strategy:
