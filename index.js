@@ -63,9 +63,11 @@ async function getAllActiveConfigs() {
   return { activeConfigs };
 }
 
-module.exports.main = async (event, context, callback) => {
+module.exports.main = async () => {
   try {
+    console.log('Starting execution...');
     const { activeConfigs } = await getAllActiveConfigs();
+    console.log('Working on configs: ', { activeConfigs });
     for (const config of activeConfigs) {
       try {
         await processActiveConfig({ config });
@@ -82,6 +84,4 @@ module.exports.main = async (event, context, callback) => {
   } finally {
     await dbManager.closeAllConnections();
   }
-
-  callback();
 };
