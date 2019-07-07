@@ -19,10 +19,12 @@ async function processActiveConfig({ config }) {
   const gdaxPassphrase = config[airtableLib.CONSTANTS.BUY_CONFIG_MAP.GDAX_PASSWORD];
 
   const { amountSpent } = await dbManager.getAmountSpentForConfigId({ configId });
+  const { lastPurchaseDate } = await dbManager.getLastPurchaseDateForConfigId({ configId });
 
-  const { amountToBuyInDollars } = strategyHelperLib.getBuyAmountInDollarsForConfig({
+  const { amountToBuyInDollars, debugData } = strategyHelperLib.getBuyAmountInDollarsForConfig({
     buyConfig: config,
-    amountSpent
+    amountSpent,
+    lastPurchaseDate
   });
 
   const { currentPriceOfProduct } = await coinbase.getCurrentPriceOfProduct({ productId });
@@ -48,7 +50,7 @@ async function processActiveConfig({ config }) {
   });
 
   await slackerLib.reportPurchasesToSlack({
-    purchases: { config, amountSpent, amountToBuyInDollars }
+    purchases: { config, debugData }
   });
 }
 
