@@ -7,6 +7,7 @@ const defaultConfig = {
   connection: {
     host: process.env.PSQL_DB_HOST,
     user: process.env.PSQL_DB_USERNAME,
+    port: process.env.PSQL_DB_PORT || 5432,
     password: process.env.PSQL_DB_PASSWORD,
     database: process.env.PSQL_DB_DATABASE,
     charset: 'utf8'

@@ -9,6 +9,10 @@ const dbManager = dbLib.getDBManager();
 
 const R = require('ramda');
 
+const EXCHANGES = {
+  COINBASE_GDAX: 'COINBASE_GDAX'
+};
+
 async function processActiveConfig({ config }) {
   console.log('Working on the following config', { config });
 
@@ -29,9 +33,10 @@ async function processActiveConfig({ config }) {
 
   const { currentPriceOfProduct } = await coinbase.getCurrentPriceOfProduct({ productId });
 
-  let cryptoPurchased = 0;
+  let cryptoPurchased = 0,
+    orderId = null;
   if (amountToBuyInDollars > 0) {
-    ({ cryptoPurchased } = await coinbase.buyProduct({
+    ({ cryptoPurchased, orderId } = await coinbase.buyProduct({
       productId,
       purchaseAmount: amountToBuyInDollars,
       gdaxKey,
@@ -46,7 +51,9 @@ async function processActiveConfig({ config }) {
     amountOfCryptoPurchased: cryptoPurchased,
     productId,
     succeeded: true,
-    currentPriceOfProduct
+    currentPriceOfProduct,
+    exchange: EXCHANGES.COINBASE_GDAX,
+    transactionId: orderId
   });
 
   await slackerLib.reportPurchasesToSlack({
