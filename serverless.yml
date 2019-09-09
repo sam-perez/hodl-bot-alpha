@@ -34,6 +34,9 @@ provider:
         PSQL_DB_PASSWORD: ${s3:hodl-bot-config/lambda-functions/${self:custom.myStage}/PSQL_DB_PASSWORD}
         PSQL_DB_USERNAME: ${s3:hodl-bot-config/lambda-functions/${self:custom.myStage}/PSQL_DB_USERNAME}
         GDAX_API_URI: ${s3:hodl-bot-config/lambda-functions/${self:custom.myStage}/GDAX_API_URI}
+        SSH_TUNNEL_HOST: ${s3:hodl-bot-config/lambda-functions/${self:custom.myStage}/SSH_TUNNEL_HOST}
+        SSH_TUNNEL_PRIVATE_KEY: ${s3:hodl-bot-config/lambda-functions/${self:custom.myStage}/SSH_TUNNEL_PRIVATE_KEY}
+        SSH_TUNNEL_SECRET: ${s3:hodl-bot-config/lambda-functions/${self:custom.myStage}/SSH_TUNNEL_SECRET}
 
 functions:
     execute_dca_strategy:
@@ -42,11 +45,3 @@ functions:
             - schedule:
                   rate: rate(1 minute)
                   enabled: true
-        vpc:
-            securityGroupIds:
-                - sg-051dfc739927d85ac
-            subnetIds:
-                - subnet-017717610b1712772
-                - subnet-021d5bb86407c3b7b
-                - subnet-069976d534e10821c
-                - subnet-08489c9d0d965422e
