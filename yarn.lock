@@ -29,11 +29,11 @@
   version "2.3.5"
   resolved "https://registry.yarnpkg.com/@types/tough-cookie/-/tough-cookie-2.3.5.tgz#9da44ed75571999b65c37b60c9b2b88db54c585d"
 
-airtable@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/airtable/-/airtable-0.6.0.tgz#b29642bc2ef56ee612805599f6d502ac16818e6c"
+airtable@^0.7.2:
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/airtable/-/airtable-0.7.2.tgz#106e87b7139f6a2c9f1bd856583e83626e2f3c04"
   dependencies:
-    lodash "4.17.11"
+    lodash "4.17.15"
     request "2.88.0"
     xhr "2.3.3"
 
@@ -813,9 +813,9 @@ lodash.defaults@^4.1.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.defaults/-/lodash.defaults-4.2.0.tgz#d09178716ffea4dde9e5fb7b37f6f0802274580c"
 
-lodash@4.17.11, lodash@^4.17.11:
-  version "4.17.11"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
+lodash@4.17.15, lodash@^4.17.11:
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
 
 make-iterator@^1.0.0:
   version "1.0.1"
